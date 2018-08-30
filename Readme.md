@@ -1,7 +1,7 @@
 # Личный проект «Кэндишоп» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий  Наумов](https://up.htmlacademy.ru/javascript/15/user/685293).
-* Наставник: [Дмитрий  Рябинин](https://htmlacademy.ru/profile/haschish).
+* Наставник: [Дмитрий  Рябинин](https://up.htmlacademy.ru/javascript/15/user/63289).
 
 ---
 
