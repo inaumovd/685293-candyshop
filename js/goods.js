@@ -155,7 +155,6 @@ var renderCatalogItem = function (item) {
   }
 
   catalogItem.querySelector('.card__title').textContent = item.name;
-
   catalogItem.querySelector('.card__price').innerHTML = item.price + '<span class="card__currency">&#x20BD;</span> <span class="card__weight">/' + item.weight + 'Г</span>';
 
   if (item.rating.value === 1) {
