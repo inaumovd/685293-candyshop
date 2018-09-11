@@ -1,3 +1,5 @@
+'use strict';
+
 var GOODS_NAMES = [
   'Чесночные сливки',
   'Огуречный педант',
@@ -75,28 +77,28 @@ var CONTENTS_LIST = [
   'карбамид',
   'вилларибо',
   'виллабаджо'];
-  var currentContents;
-  var catalogCardTemplate = document.querySelector('#card')
+var currentContents;
+var catalogCardTemplate = document.querySelector('#card')
   .content
   .querySelector('.catalog__card');
-  var cartCardTemplate = document.querySelector('#card-order')
+var cartCardTemplate = document.querySelector('#card-order')
   .content
   .querySelector('.goods_card');
-  var cardsCatalog = document.querySelector('.catalog__cards')
-  var cartCardsCatalog = document.querySelector('.goods__cards')
+var cardsCatalog = document.querySelector('.catalog__cards');
+var cartCardsCatalog = document.querySelector('.goods__cards');
 
 var getRundomInt = function (min, max) {
-  return Math.round(Math.random() *(max - min)) + min;
+  return Math.round(Math.random() * (max - min)) + min;
 };
 
 var getRandomItem = function (items) {
   return items[Math.round(Math.random() * (items.length - 1))];
 };
 
-var getContents = function(contentsList) {
+var getContents = function (contentsList) {
   var contentsQuantity = getRundomInt(0, contentsList.length);
   currentContents = getRandomItem(contentsList);
-  for (i = 0; i < contentsQuantity; i++) {
+  for (var i = 0; i < contentsQuantity; i++) {
     var newContent = getRandomItem(contentsList);
     currentContents = currentContents + ', ' + newContent;
   }
@@ -108,9 +110,9 @@ var getNutritionFacts = function () {
     sugar: Boolean(getRundomInt(0, 1)),
     energy: getRundomInt(70, 500),
     contents: getContents(CONTENTS_LIST),
-  }
+  };
   return nutritionFacts;
-}
+};
 
 var getRating = function () {
   var rating = {
@@ -131,12 +133,12 @@ var getGoods = function () {
     nutritionFacts: getNutritionFacts()
   };
   return goods;
-}
+};
 
 var getGoodsList = function (quantity) {
   var goodsList = [];
   for (var i = 0; i < quantity; i++) {
-  goodsList[i] = getGoods();
+    goodsList[i] = getGoods();
   }
   return goodsList;
 };
@@ -171,9 +173,9 @@ var renderCatalogItem = function (item) {
   catalogItem.querySelector('.star__count').textContent = item.rating.number;
 
   if (item.nutritionFacts.sugar) {
-    catalogItem.querySelector('.card__characteristic').textContent = "Содержит сахар";
+    catalogItem.querySelector('.card__characteristic').textContent = 'Содержит сахар';
   } else {
-    catalogItem.querySelector('.card__characteristic').textContent = "Без сахара";
+    catalogItem.querySelector('.card__characteristic').textContent = 'Без сахара';
   }
   return catalogItem;
 };
@@ -183,7 +185,7 @@ var appendCatalog = function (catalogItems) {
   for (var i = 0; i < catalogItems.length; i++) {
     fragment.appendChild(renderCatalogItem(catalogItems[i]));
   }
-  cardsCatalog.appendChild(fragment)
+  cardsCatalog.appendChild(fragment);
 };
 
 var renderCartItem = function (item) {
@@ -191,15 +193,15 @@ var renderCartItem = function (item) {
   cartItem.querySelector('.card-order__title').textContent = item.name;
   cartItem.querySelector('.card-order__price').innerHTML = item.price + '<span class="card__currency">&#x20BD;</span>';
   return cartItem;
-}
+};
 
 var appendCart = function (cartItems) {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < cartItems.length; i++) {
     fragment.appendChild(renderCartItem(cartItems[i]));
   }
-  cartCardsCatalog.appendChild(fragment)
-}
+  cartCardsCatalog.appendChild(fragment);
+};
 
 cardsCatalog.classList.remove('catalog__cards--load');
 document.querySelector('.catalog__load').classList.add('visually-hidden');
