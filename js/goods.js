@@ -29,7 +29,7 @@ var GOODS_NAMES = [
   'Невинные винные',
   'Бельгийское пенное',
   'Острый язычок'
-  ];
+];
 var GOODS_PICTURES = [
   'gum-cedar.jpg',
   'gum-chile.jpg',
@@ -59,7 +59,7 @@ var GOODS_PICTURES = [
   'soda-garlic.jpg',
   'soda-peanut-grapes.jpg',
   'soda-russian.jpg'
-  ];
+];
 var CONTENTS_LIST = [
   'молоко',
   'сливки',
@@ -79,7 +79,7 @@ var CONTENTS_LIST = [
   'карбамид',
   'вилларибо',
   'виллабаджо'
-  ];
+];
 var currentContents;
 var catalogCardTemplate = document.querySelector('#card')
   .content
@@ -163,7 +163,7 @@ var renderCatalogItem = function (item) {
   catalogItem.querySelector('.stars__rating').classList.remove('stars__rating--five');
 
   var classRatingSuffix;
-  switch(item.rating.value) {
+  switch (item.rating.value) {
     case 1: classRatingSuffix = 'one'; break;
     case 2: classRatingSuffix = 'two'; break;
     case 3: classRatingSuffix = 'three'; break;
