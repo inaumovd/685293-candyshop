@@ -28,36 +28,38 @@ var GOODS_NAMES = [
   'Бесконечный взрыв',
   'Невинные винные',
   'Бельгийское пенное',
-  'Острый язычок'];
+  'Острый язычок'
+  ];
 var GOODS_PICTURES = [
-  'img/cards/gum-cedar.jpg',
-  'img/cards/gum-chile.jpg',
-  'img/cards/gum-eggplant.jpg',
-  'img/cards/gum-mustard.jpg',
-  'img/cards/gum-portwine.jpg',
-  'img/cards/gum-wasabi.jpg',
-  'img/cards/ice-cucumber.jpg',
-  'img/cards/ice-eggplant.jpg',
-  'img/cards/ice-garlic.jpg',
-  'img/cards/ice-italian.jpg',
-  'img/cards/ice-mushroom.jpg',
-  'img/cards/ice-pig.jpg',
-  'img/cards/marmalade-beer.jpg',
-  'img/cards/marmalade-caviar.jpg',
-  'img/cards/marmalade-corn.jpg',
-  'img/cards/marmalade-new-year.jpg',
-  'img/cards/marmalade-sour.jpg',
-  'img/cards/marshmallow-bacon.jpg',
-  'img/cards/marshmallow-beer.jpg',
-  'img/cards/marshmallow-shrimp.jpg',
-  'img/cards/marshmallow-spicy.jpg',
-  'img/cards/marshmallow-wine.jpg',
-  'img/cards/soda-bacon.jpg',
-  'img/cards/soda-celery.jpg',
-  'img/cards/soda-cob.jpg',
-  'img/cards/soda-garlic.jpg',
-  'img/cards/soda-peanut-grapes.jpg',
-  'img/cards/soda-russian.jpg'];
+  'gum-cedar.jpg',
+  'gum-chile.jpg',
+  'gum-eggplant.jpg',
+  'gum-mustard.jpg',
+  'gum-portwine.jpg',
+  'gum-wasabi.jpg',
+  'ice-cucumber.jpg',
+  'ice-eggplant.jpg',
+  'ice-garlic.jpg',
+  'ice-italian.jpg',
+  'ice-mushroom.jpg',
+  'ice-pig.jpg',
+  'marmalade-beer.jpg',
+  'marmalade-caviar.jpg',
+  'marmalade-corn.jpg',
+  'marmalade-new-year.jpg',
+  'marmalade-sour.jpg',
+  'marshmallow-bacon.jpg',
+  'marshmallow-beer.jpg',
+  'marshmallow-shrimp.jpg',
+  'marshmallow-spicy.jpg',
+  'marshmallow-wine.jpg',
+  'soda-bacon.jpg',
+  'soda-celery.jpg',
+  'soda-cob.jpg',
+  'soda-garlic.jpg',
+  'soda-peanut-grapes.jpg',
+  'soda-russian.jpg'
+  ];
 var CONTENTS_LIST = [
   'молоко',
   'сливки',
@@ -76,7 +78,8 @@ var CONTENTS_LIST = [
   'ксилит',
   'карбамид',
   'вилларибо',
-  'виллабаджо'];
+  'виллабаджо'
+  ];
 var currentContents;
 var catalogCardTemplate = document.querySelector('#card')
   .content
@@ -87,7 +90,7 @@ var cartCardTemplate = document.querySelector('#card-order')
 var cardsCatalog = document.querySelector('.catalog__cards');
 var cartCardsCatalog = document.querySelector('.goods__cards');
 
-var getRundomInt = function (min, max) {
+var getRandomInt = function (min, max) {
   return Math.round(Math.random() * (max - min)) + min;
 };
 
@@ -96,7 +99,7 @@ var getRandomItem = function (items) {
 };
 
 var getContents = function (contentsList) {
-  var contentsQuantity = getRundomInt(0, contentsList.length);
+  var contentsQuantity = getRandomInt(0, contentsList.length);
   currentContents = getRandomItem(contentsList);
   for (var i = 0; i < contentsQuantity; i++) {
     var newContent = getRandomItem(contentsList);
@@ -107,8 +110,8 @@ var getContents = function (contentsList) {
 
 var getNutritionFacts = function () {
   var nutritionFacts = {
-    sugar: Boolean(getRundomInt(0, 1)),
-    energy: getRundomInt(70, 500),
+    sugar: Boolean(getRandomInt(0, 1)),
+    energy: getRandomInt(70, 500),
     contents: getContents(CONTENTS_LIST),
   };
   return nutritionFacts;
@@ -116,8 +119,8 @@ var getNutritionFacts = function () {
 
 var getRating = function () {
   var rating = {
-    value: getRundomInt(1, 5),
-    number: getRundomInt(10, 900)
+    value: getRandomInt(1, 5),
+    number: getRandomInt(10, 900)
   };
   return rating;
 };
@@ -126,9 +129,9 @@ var getGoods = function () {
   var goods = {
     name: getRandomItem(GOODS_NAMES),
     picture: getRandomItem(GOODS_PICTURES),
-    amount: getRundomInt(0, 20),
-    price: getRundomInt(100, 1500),
-    weight: getRundomInt(30, 300),
+    amount: getRandomInt(0, 20),
+    price: getRandomInt(100, 1500),
+    weight: getRandomInt(30, 300),
     rating: getRating(),
     nutritionFacts: getNutritionFacts()
   };
@@ -157,17 +160,17 @@ var renderCatalogItem = function (item) {
   catalogItem.querySelector('.card__title').textContent = item.name;
   catalogItem.querySelector('.card__price').innerHTML = item.price + '<span class="card__currency">&#x20BD;</span> <span class="card__weight">/' + item.weight + 'Г</span>';
 
-  if (item.rating.value === 1) {
-    catalogItem.querySelector('.stars__rating').classList.add('stars__rating--one');
-  } else if (item.rating.value === 2) {
-    catalogItem.querySelector('.stars__rating').classList.add('stars__rating--two');
-  } else if (item.rating.value === 3) {
-    catalogItem.querySelector('.stars__rating').classList.add('stars__rating--three');
-  } else if (item.rating.value === 4) {
-    catalogItem.querySelector('.stars__rating').classList.add('stars__rating--four');
-  } else {
-    catalogItem.querySelector('.stars__rating').classList.add('stars__rating--five');
+  catalogItem.querySelector('.stars__rating').classList.remove('stars__rating--five');
+
+  var classRatingSuffix;
+  switch(item.rating.value) {
+    case 1: classRatingSuffix = 'one'; break;
+    case 2: classRatingSuffix = 'two'; break;
+    case 3: classRatingSuffix = 'three'; break;
+    case 4: classRatingSuffix = 'four'; break;
+    case 5: classRatingSuffix = 'five'; break;
   }
+  catalogItem.querySelector('.stars__rating').classList.add('stars__rating--' + classRatingSuffix);
 
   catalogItem.querySelector('.star__count').textContent = item.rating.number;
 
